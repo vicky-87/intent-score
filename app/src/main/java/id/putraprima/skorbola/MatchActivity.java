@@ -15,7 +15,7 @@ public class MatchActivity extends AppCompatActivity {
     private TextView awayteamText;
     private TextView homeCount;
     private TextView awayCount;
-    private TextView resultCount;
+    private static final String RESULT_KEY = "result";
 
     int counterHome = 0;
     int counterAway = 0;
@@ -29,8 +29,8 @@ public class MatchActivity extends AppCompatActivity {
         hometeamText = findViewById(R.id.home_team);
         awayteamText = findViewById(R.id.away_team);
         //COUNT
-        homeCount = (TextView) findViewById(R.id.score_home);
-        awayCount = (TextView) findViewById(R.id.score_away);
+        homeCount = findViewById(R.id.score_home);
+        awayCount = findViewById(R.id.score_away);
 
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
@@ -41,8 +41,29 @@ public class MatchActivity extends AppCompatActivity {
     }
 
     public void handleCek(View view) {
+        String result;
         Intent intent =  new Intent(this, ResultActivity.class);
+
+        if(counterHome > counterAway){
+            result = homeCount.getText().toString() + " Is Winner";
+        }else if(counterHome < counterAway) {
+            result = awayCount.getText().toString() + " Is Winner";
+        }
+        else{
+            result = " Is Draw";
+        }
+        intent.putExtra(RESULT_KEY, result);
         startActivity(intent);
+    }
+
+    public void handleAddHome(View view) {
+        counterHome++;
+        homeCount.setText(Integer.toString(counterHome));
+    }
+
+    public void handleAddAway(View view) {
+        counterAway++;
+        awayCount.setText(Integer.toString(counterAway));
     }
 }
 //1.Menampilkan detail match sesuai data dari main activity
