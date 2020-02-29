@@ -6,20 +6,20 @@ import android.os.Bundle;
 import android.widget.TextView;
 
 public class ResultActivity extends AppCompatActivity {
-    private TextView matchResults;
+    private TextView Result;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_result);
 
-        matchResults = findViewById(R.id.textView3);
+        Result = findViewById(R.id.textView3);
 
         Bundle bundle = getIntent().getExtras();
-        String value = bundle.getString("results");
+        String value = bundle.getString("result");
 
         if(bundle != null){
-            matchResults.setText(value);
+            Result.setText(value);
         }
     }
 }

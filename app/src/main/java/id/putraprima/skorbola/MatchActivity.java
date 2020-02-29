@@ -26,8 +26,8 @@ public class MatchActivity extends AppCompatActivity {
         setContentView(R.layout.activity_match);
 
         //TODO
-        hometeamText = findViewById(R.id.home_team);
-        awayteamText = findViewById(R.id.away_team);
+        hometeamText = findViewById(R.id.txt_home);
+        awayteamText = findViewById(R.id.txt_away);
         //COUNT
         homeCount = findViewById(R.id.score_home);
         awayCount = findViewById(R.id.score_away);
@@ -40,22 +40,6 @@ public class MatchActivity extends AppCompatActivity {
         }
     }
 
-    public void handleCek(View view) {
-        String result;
-        Intent intent =  new Intent(this, ResultActivity.class);
-
-        if(counterHome > counterAway){
-            result = homeCount.getText().toString() + " Is Winner";
-        }else if(counterHome < counterAway) {
-            result = awayCount.getText().toString() + " Is Winner";
-        }
-        else{
-            result = " Is Draw";
-        }
-        intent.putExtra(RESULT_KEY, result);
-        startActivity(intent);
-    }
-
     public void handleAddHome(View view) {
         counterHome++;
         homeCount.setText(Integer.toString(counterHome));
@@ -64,6 +48,21 @@ public class MatchActivity extends AppCompatActivity {
     public void handleAddAway(View view) {
         counterAway++;
         awayCount.setText(Integer.toString(counterAway));
+    }
+
+    public void handleCek(View view) {
+        String result;
+        Intent intent = new Intent(this, ResultActivity.class);
+
+        if (counterHome > counterAway) {
+            result = hometeamText.getText().toString() + " Is the Winner";
+        } else if (counterHome < counterAway) {
+            result = awayteamText.getText().toString() + " Is the Winner";
+        } else {
+            result = " Is Draw";
+        }
+        intent.putExtra(RESULT_KEY, result);
+        startActivity(intent);
     }
 }
 //1.Menampilkan detail match sesuai data dari main activity
