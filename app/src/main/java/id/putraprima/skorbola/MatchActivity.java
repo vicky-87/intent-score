@@ -3,8 +3,10 @@ package id.putraprima.skorbola;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import static id.putraprima.skorbola.MainActivity.AWAYTEAM_KEY;
@@ -15,7 +17,11 @@ public class MatchActivity extends AppCompatActivity {
     private TextView awayteamText;
     private TextView homeCount;
     private TextView awayCount;
+    private ImageView homeLogo;
+    private ImageView awayLogo;
     private static final String RESULT_KEY = "result";
+    public static final String IMAGE_KEY_HOME = "imagehome";
+    public static final String IMAGE_KEY_AWAY = "imageaway";
 
     int counterHome = 0;
     int counterAway = 0;
@@ -31,12 +37,18 @@ public class MatchActivity extends AppCompatActivity {
         //COUNT
         homeCount = findViewById(R.id.score_home);
         awayCount = findViewById(R.id.score_away);
+        homeLogo = findViewById(R.id.home_logo);
+        awayLogo = findViewById(R.id.away_logo);
 
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
             // TODO: display value here
             hometeamText.setText(extras.getString(HOMETEAM_KEY));
             awayteamText.setText(extras.getString(AWAYTEAM_KEY));
+            Bitmap home = extras.getParcelable(IMAGE_KEY_HOME);
+            Bitmap away = extras.getParcelable(IMAGE_KEY_AWAY);
+            homeLogo.setImageBitmap(home);
+            awayLogo.setImageBitmap(away);
         }
     }
 
